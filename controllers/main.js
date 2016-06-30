@@ -8,13 +8,8 @@ function Main(Prediction, $state) {
 
   vm.submit = function(down, ydstogo, ScoreDiff, TimeSecs) {
     Prediction.submit(down, ydstogo, ScoreDiff, TimeSecs).then(function(result) {
-      if (result === 1) {
-        vm.result = 'Pass';
-      } else if (result === 2) {
-        vm.result = 'Run';
-      } else {
-        vm.result = 'Other';
-      }
+      console.log(JSON.parse(result));
+      vm.result = JSON.parse(result);
       $state.go('main.result');
     })
   }
