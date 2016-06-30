@@ -1,5 +1,5 @@
 <div class="container">
-  <form ng-submit='main.submit(main.down, main.ydstogo, main.ScoreDiff, main.TimeSecs)' method="post" class='form-horizontal'>
+  <form ng-submit='main.submit(main.down, main.ydstogo, main.yrdline100, main.ScoreDiff, main.TimeSecs)' method="post" class='form-horizontal'>
     <div class="col-md-12">
       <div class="row">
         <label for="down">Down</label>
@@ -24,6 +24,10 @@
           <option value='9'>9</option>
           <option value='10'>10+</option>
         </select>
+      </div>
+      <div class="row">
+        <label for="yrdline100">Yard Line</label>
+        <input ng-model='main.yrdline100' class='form-control' type="number" name="yrdline100" value="" id='yrdline100'>
       </div>
       <div class="row">
         <label for="ScoreDiff">Score Differential</label>
