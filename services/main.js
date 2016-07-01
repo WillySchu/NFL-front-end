@@ -5,7 +5,7 @@ angular.module('app')
     const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/';
     return {
       submit: function(features) {
-        return $http.post(stageUrl, features).then(function(data) {
+        return $http.post(devUrl, features).then(function(data) {
           return data.data;
         })
       }

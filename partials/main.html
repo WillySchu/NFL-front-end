@@ -2,6 +2,10 @@
   <form ng-submit='main.submit(main.features)' method="post" class='form-horizontal'>
     <div class="col-md-12">
       <div class="row">
+        <label for="posteamint">Team</label>
+        <input ng-model='main.features.posteamint' class='form-control' type="number" name="posteamint" value="" id='posteamint'>
+      </div>
+      <div class="row">
         <label for="down">Down</label>
         <select ng-model='main.features.down' class="form-control" name="down" id='down'>
           <option value='1'>First</option>
