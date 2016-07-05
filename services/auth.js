@@ -5,7 +5,7 @@ Auth.$inject = ['$q', '$timeout', '$http']
 
 
 function Auth($q, $timeout, $http) {
-  const user = null;
+  let user = null;
   const devUrl = 'http://0.0.0.0:5000/';
   const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/';
   const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/';
@@ -25,12 +25,13 @@ function Auth($q, $timeout, $http) {
     }
   }
 
-  function login(email, password) {
+  function login(info) {
     const deferred = $q.defer();
 
-    $http.post(devUrl + '/login', {email, password})
-      .sucess(function(data, status) {
-        if (status === 200 && data.result) {
+    $http.post(devUrl + 'login', info)
+      .then(function(data) {
+        console.log(data);
+        if (data.status === 200 && data.data.result) {
           user = true;
           deferred.resolve();
         } else {
@@ -38,7 +39,7 @@ function Auth($q, $timeout, $http) {
           deferred.reject();
         }
       })
-      .error(function(data) {
+      .catch(function(data) {
         user = false;
         deferred.reject();
       })
@@ -48,7 +49,7 @@ function Auth($q, $timeout, $http) {
   function logout() {
     const deferred = $q.defer();
 
-    $http.get(devUrl + '/logout')
+    $http.get(devUrl + 'logout')
       .success(function(data) {
         user = false;
         deferred.resolve();
@@ -60,12 +61,12 @@ function Auth($q, $timeout, $http) {
     return deferred.promise;
   }
 
-  function register(email, password) {
+  function register(info) {
     const deferred = $q.defer();
 
-    $http.post('/register', {email, password})
-      .success(function(data, status) {
-        if (status === 200 && data.result) {
+    $http.post('register', info)
+      .success(function(data) {
+        if (data.status === 200 && data.data.result) {
           deferred.resolve();
         } else {
           deferred.reject();
