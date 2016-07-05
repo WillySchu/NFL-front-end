@@ -1,9 +1,9 @@
 angular.module('app')
   .controller('Main', Main)
 
-Main.$inject = ['Prediction', '$state']
+Main.$inject = ['Prediction', '$state', '$scope']
 
-function Main(Prediction, $state) {
+function Main(Prediction, $state, $scope) {
   const vm = this;
 
   vm.submit = function(features) {
@@ -37,6 +37,9 @@ function Main(Prediction, $state) {
         children: fResult
       }]
 
+      if (vm.api) {
+        vm.api.refresh();
+      }
       $state.go('main.result');
     })
   }
