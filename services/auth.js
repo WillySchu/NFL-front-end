@@ -4,8 +4,8 @@ angular.module('app')
 Auth.$inject = ['$q', '$timeout', '$http']
 
 function Auth($q, $timeout, $http) {
-  let user = null;
-  const devUrl = 'http://0.0.0.0:5000/';
+  var user = null;
+  const devUrl = 'http://10.5.82.83:5000/';
   const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/';
   const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/';
 
