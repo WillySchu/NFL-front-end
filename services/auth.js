@@ -3,7 +3,6 @@ angular.module('app')
 
 Auth.$inject = ['$q', '$timeout', '$http']
 
-
 function Auth($q, $timeout, $http) {
   let user = null;
   const devUrl = 'http://0.0.0.0:5000/';

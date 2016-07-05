@@ -29,7 +29,12 @@ angular.module('app')
       .state('login', {
         url: '/login',
         views: {
-          content: {
+          nav: {
+            templateUrl: 'partials/nav.html',
+            controller: 'Nav',
+            controllerAs: 'nav'
+          },
+          'content': {
             templateUrl: 'partials/login.html',
             controller: 'Login',
             controllerAs: 'login'
@@ -39,7 +44,12 @@ angular.module('app')
       .state('register', {
         url: '/register',
         views: {
-          content: {
+          nav: {
+            templateUrl: 'partials/nav.html',
+            controller: 'Nav',
+            controllerAs: 'nav'
+          },
+          'content': {
             templateUrl: 'partials/login.html',
             controller: 'Register',
             controllerAs: 'login'
