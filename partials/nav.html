@@ -18,7 +18,10 @@
         <li ng-class='{active: nav.isActive("/profile")}'><a ui-sref='.profile' href="">Profile</a></li>
       </ul> -->
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="" ng-click='nav.signIn()'>Sign In</a></li>
+        <li>
+          <a ng-hide='nav.isUser' href="" ng-click='nav.signIn()'>Sign In</a>
+          <a ng-show='nav.isUser' href="" ng-click='nav.logout()'>Sign Out</a>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
