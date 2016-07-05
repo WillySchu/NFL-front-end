@@ -3,8 +3,16 @@ angular.module('app')
     $urlRouterProvider.otherwise('/')
 
     $stateProvider
-      .state('main', {
+      .state('splash', {
         url: '/',
+        views: {
+          content: {
+            templateUrl: 'partials/splash.html'
+          }
+        }
+      })
+      .state('main', {
+        url: '/main',
         views: {
           nav: {
             templateUrl: 'partials/nav.html',
