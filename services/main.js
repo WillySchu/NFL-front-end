@@ -4,12 +4,12 @@ angular.module('app')
 Prediction.$inject = ['$http']
 
 function Prediction($http) {
-  const devUrl = 'http://0.0.0.0:5000/';
-  const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/';
-  const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/';
+  const devUrl = 'http://0.0.0.0:5000/api/';
+  const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/api/';
+  const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/api/';
   return {
     submit: function(features) {
-      return $http.post(devUrl, features).then(function(data) {
+      return $http.post(devUrl + 'complex', features).then(function(data) {
         return data.data;
       })
     }
