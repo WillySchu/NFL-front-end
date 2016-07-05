@@ -6,6 +6,8 @@ Login.$inject = ['$state', 'Auth']
 function Login($state, Auth) {
   const vm = this;
 
+  vm.title = 'Login';
+
   vm.submit = function(form) {
     vm.error = false;
     vm.disabled = true;

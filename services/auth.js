@@ -50,11 +50,11 @@ function Auth($q, $timeout, $http) {
     const deferred = $q.defer();
 
     $http.get(devUrl + 'logout')
-      .success(function(data) {
+      .then(function(data) {
         user = false;
         deferred.resolve();
       })
-      .error(function(data) {
+      .catch(function(data) {
         user = false;
         deferred.reject();
       })
@@ -64,15 +64,16 @@ function Auth($q, $timeout, $http) {
   function register(info) {
     const deferred = $q.defer();
 
-    $http.post('register', info)
-      .success(function(data) {
+    $http.post(devUrl + 'register', info)
+      .then(function(data) {
+        console.log(data);
         if (data.status === 200 && data.data.result) {
           deferred.resolve();
         } else {
           deferred.reject();
         }
       })
-      .error(function(data) {
+      .catch(function(data) {
         deferred.reject();
       })
     return deferred.promise;
