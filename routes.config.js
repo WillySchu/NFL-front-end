@@ -6,12 +6,12 @@ angular.module('app')
       .state('main', {
         url: '/',
         views: {
-          'nav': {
+          nav: {
             templateUrl: 'partials/nav.html',
             controller: 'Nav',
             controllerAs: 'nav'
           },
-          'content': {
+          content: {
             templateUrl: 'partials/main.html',
             controller: 'Main',
             controllerAs: 'main'
@@ -23,6 +23,26 @@ angular.module('app')
         views: {
           'result@main': {
             templateUrl: 'partials/result.html'
+          }
+        }
+      })
+      .state('login', {
+        url: '/login',
+        views: {
+          content: {
+            templateUrl: 'partials/login.html',
+            controller: 'Login',
+            controllerAs: 'login'
+          }
+        }
+      })
+      .state('register', {
+        url: '/register',
+        views: {
+          content: {
+            templateUrl: 'partials/login.html',
+            controller: 'Register',
+            controllerAs: 'login'
           }
         }
       })
