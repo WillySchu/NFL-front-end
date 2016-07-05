@@ -8,8 +8,8 @@ function Prediction($http) {
   const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/api/';
   const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/api/';
   return {
-    submit: function(features) {
-      return $http.post(devUrl + 'complex', features).then(function(data) {
+    submit: function(features, ext) {
+      return $http.post(devUrl + ext, features).then(function(data) {
         return data.data;
       })
     }

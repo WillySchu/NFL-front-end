@@ -6,8 +6,8 @@ Main.$inject = ['Prediction', '$state', '$scope']
 function Main(Prediction, $state, $scope) {
   const vm = this;
 
-  vm.submit = function(features) {
-    Prediction.submit(features).then(function(result) {
+  vm.submitComplex = function(features) {
+    Prediction.submit(features, 'complex').then(function(result) {
       vm.result = JSON.parse(result);
       fResult = [
         {name: 'Pass', size: 0, children: []},
@@ -37,20 +37,67 @@ function Main(Prediction, $state, $scope) {
         children: fResult
       }]
 
+      vm.options = {
+        chart: {
+          type: 'sunburstChart',
+          height: 450,
+          color: d3.scale.category10(),
+          duration: 250,
+          mode: 'size',
+        }
+      }
+
       if (vm.api) {
         vm.api.refresh();
       }
+
       $state.go('main.result');
     })
   }
 
-  vm.options = {
-    chart: {
-      type: 'sunburstChart',
-      height: 450,
-      color: d3.scale.category10(),
-      duration: 250,
-      mode: 'size'
-    }
+  vm.submitSimple = function(features) {
+    Prediction.submit(features, 'simple').then(function(result) {
+      vm.result = JSON.parse(result);
+      fResult = []
+
+      names = ['Pass', 'Run', 'Punt', 'Field Goal'];
+
+      for (i in vm.result) {
+        fResult.push({key: names[i], y: vm.result[i]})
+      }
+
+      vm.data = fResult;
+
+      vm.options = {
+        chart: {
+          type: 'pieChart',
+          height: 450,
+          donut: true,
+          x: function(d){return d.key;},
+          y: function(d){return d.y;},
+          showLabels: true,
+
+          pie: {
+            startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
+            endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
+          },
+          duration: 500,
+          legend: {
+            margin: {
+              top: 5,
+              right: 70,
+              bottom: 5,
+              left: 0
+            }
+          }
+        }
+      }
+
+      if (vm.api) {
+        vm.api.refresh();
+      }
+
+      $state.go('main.result');
+    })
   }
 }
