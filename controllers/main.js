@@ -106,14 +106,28 @@ function Main(Prediction, $state, $scope) {
   }
 
   vm.simpleSuccess = function(features) {
-    Prediction.submit(features, 'success/simple').then(function(result) {
-      console.log(result);
+    return Prediction.submit(features, 'success/simple').then(function(result) {
+      return result;
     })
   }
 
   vm.complexSuccess = function(features) {
-    Prediction.submit(features, 'success/complex').then(function(result) {
-      console.log(result);
+    return Prediction.submit(features, 'success/complex').then(function(result) {
+      return result;
     })
-  },
+  }
+
+  vm.simpleSuccessAll = function(features) {
+    var psbl = []
+    for (var i = 0; i < 4; i++) {
+      features['play'] = i;
+      psbl.push(JSON.parse(JSON.stringify(features)));
+    }
+
+    var pResults = psbl.map(vm.complexSuccess)
+
+    Promise.all(pResults).then(data => {
+      console.log(data);
+    })
+  }
 }
