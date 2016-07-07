@@ -11,9 +11,9 @@ function Main(Prediction, $state, $scope) {
   }
 
   vm.submitComplex = function(features) {
-    Prediction.submit(features, 'complex').then(function(result) {
+    Prediction.submit(features, 'pred/complex').then(function(result) {
       vm.result = JSON.parse(result);
-      fResult = [
+      var fResult = [
         {name: 'Pass', size: 0, children: []},
         {name: 'Run', size: 0, children: []}
       ]
@@ -47,7 +47,7 @@ function Main(Prediction, $state, $scope) {
           height: 450,
           color: d3.scale.category10(),
           duration: 250,
-          mode: 'size',
+          mode: 'size'
         }
       }
 
@@ -60,9 +60,9 @@ function Main(Prediction, $state, $scope) {
   }
 
   vm.submitSimple = function(features) {
-    Prediction.submit(features, 'simple').then(function(result) {
+    Prediction.submit(features, 'pred/simple').then(function(result) {
       vm.result = JSON.parse(result);
-      fResult = []
+      var fResult = []
 
       names = ['Pass', 'Run', 'Punt', 'Field Goal'];
 
@@ -104,4 +104,16 @@ function Main(Prediction, $state, $scope) {
       $state.go('main.result');
     })
   }
+
+  vm.simpleSuccess = function(features) {
+    Prediction.submit(features, 'success/simple').then(function(result) {
+      console.log(result);
+    })
+  }
+
+  vm.complexSuccess = function(features) {
+    Prediction.submit(features, 'success/complex').then(function(result) {
+      console.log(result);
+    })
+  },
 }
