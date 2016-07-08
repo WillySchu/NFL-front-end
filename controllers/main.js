@@ -126,7 +126,7 @@ function Main(Prediction, $state, $scope) {
 
     var pResults = psbl.map(vm.complexSuccess)
 
-    vm.data = [{
+    vm.sData = [{
       key: 'Success',
       color: '#0f0',
       values: []
@@ -137,50 +137,58 @@ function Main(Prediction, $state, $scope) {
       values: []
     }]
 
+    names = ['Pass', 'Run', 'Punt', 'Field Goal'];
+
     Promise.all(pResults).then(function(results) {
       for (i in results) {
         var res = JSON.parse(results[i]);
-        vm.data[0].values.push(res[0]);
-        vm.data[1].values.push(res[1]);
+        vm.sData[0].values.push({
+          x: names[i],
+          y: res[0] * vm.data[i].y
+        });
+        vm.sData[1].values.push({
+          x: names[i],
+          y: res[1] * vm.data[i].y
+        });
       }
-    })
-    console.log(vm.data);
 
-    vm.options = {
-      chart: {
-        type: 'multiBarChart',
-        height: 600,
-        margin : {
-          top: 20,
-          right: 20,
-          bottom: 60,
-          left: 45
-        },
-        clipEdge: true,
-        staggerLabels: true,
-        transitionDuration: 1000,
-        tooltips: true,
-        tooltipContent: function (key, x, y, e, graph) {
-          return '<p>' + key + ': ' + y + '</p>';
-        },
-        stacked: true,
-        showControls: false,
-        xAxis: {
-          axisLabel: 'Time',
-          showMaxMin: true,
-          tickFormat: function(d) {return d;}
-        },
-        yAxis: {
-          axisLabel: 'Number of emails',
-          axisLabelDistance: 100,
-          tickFormat: function(d){
-            return d3.format(',.f')(d);
+      vm.options = {
+        chart: {
+          type: 'multiBarChart',
+          height: 450,
+          margin : {
+            top: 20,
+            right: 20,
+            bottom: 60,
+            left: 45
+          },
+          clipEdge: true,
+          staggerLabels: true,
+          transitionDuration: 1000,
+          tooltips: true,
+          tooltipContent: function (key, x, y, e, graph) {
+            return '<p>' + key + ': ' + y + '</p>';
+          },
+          stacked: true,
+          showControls: false,
+          xAxis: {
+            axisLabel: 'Time',
+            showMaxMin: true,
+            tickFormat: function(d) {return d;}
+          },
+          yAxis: {
+            axisLabel: 'Number of emails',
+            axisLabelDistance: 100,
+            tickFormat: function(d){
+              return d3.format(',.f')(d);
+            }
           }
         }
       }
-    }
-    vm.options.chart.tooltip.enable();
-    $state.go('main.result');
+      $state.go('main.result.success');
+    })
+
+
   }
 
   vm.complexSuccessAll = function(features) {

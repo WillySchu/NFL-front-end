@@ -34,6 +34,14 @@ angular.module('app')
           }
         }
       })
+      .state('main.result.success', {
+        url: '/success',
+        views: {
+          'result@main': {
+            templateUrl: 'partials/success.html'
+          }
+        }
+      })
       .state('login', {
         url: '/login',
         views: {
