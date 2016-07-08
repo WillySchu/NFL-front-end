@@ -27,7 +27,7 @@ angular.module('app')
         }
       })
       .state('teams', {
-        url: '/teams',
+        url: 'teams/',
         views: {
           'main@main': {
             templateUrl: 'partials/team.html'
@@ -35,15 +35,17 @@ angular.module('app')
         }
       })
       .state('main.select', {
-        url: '/select',
+        url: 'select/',
         views: {
           'main@main': {
-            templateUrl: 'partials/select.html'
+            templateUrl: 'partials/select.html',
+            controller: 'Select',
+            controllerAs: 'select'
           }
         }
       })
       .state('main.select.result', {
-        url: '/result',
+        url: 'result/',
         views: {
           'result@main.select': {
             templateUrl: 'partials/result.html'
@@ -51,7 +53,7 @@ angular.module('app')
         }
       })
       .state('main.select.result.success', {
-        url: '/success',
+        url: 'success/',
         views: {
           'result@main.main': {
             templateUrl: 'partials/success.html'
@@ -59,7 +61,7 @@ angular.module('app')
         }
       })
       .state('main.login', {
-        url: '/login',
+        url: 'login/',
         views: {
           'content': {
             templateUrl: 'partials/login.html',
@@ -69,7 +71,7 @@ angular.module('app')
         }
       })
       .state('main.register', {
-        url: '/register',
+        url: 'register/',
         views: {
           'content': {
             templateUrl: 'partials/login.html',

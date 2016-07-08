@@ -1,53 +1,165 @@
-<div class="container">
-  <form ng-submit='main.submitComplex(main.features)' method="post" class='form-horizontal'>
-    <div class="col-md-12">
-      <div class="row">
-        <label for="posteamint">Team</label>
-        <input ng-model='main.features.posteamint' class='form-control' type="number" name="posteamint" value="" id='posteamint'>
-      </div>
-      <div class="row">
-        <label for="down">Down</label>
-        <select ng-model='main.features.down' class="form-control" name="down" id='down'>
-          <option value='1'>First</option>
-          <option value='2'>Second</option>
-          <option value='3'>Third</option>
-          <option value='4'>Fourth</option>
-        </select>
-      </div>
-      <div class="row">
-        <label for="ydstogo">Distance</label>
-        <select ng-model='main.features.ydstogo' class="form-control" name="ydstogo" id='ydstogo'>
-          <option value='1'>1</option>
-          <option value='2'>2</option>
-          <option value='3'>3</option>
-          <option value='4'>4</option>
-          <option value='5'>5</option>
-          <option value='6'>6</option>
-          <option value='7'>7</option>
-          <option value='8'>8</option>
-          <option value='9'>9</option>
-          <option value='10'>10+</option>
-        </select>
-      </div>
-      <div class="row">
-        <label for="yrdline100">Yard Line</label>
-        <input ng-model='main.features.yrdline100' class='form-control' type="number" name="yrdline100" value="" id='yrdline100'>
-      </div>
-      <div class="row">
-        <label for="ScoreDiff">Score Differential</label>
-        <input ng-model='main.features.ScoreDiff' class='form-control' type="number" name="ScoreDiff" value="" id='ScoreDiff'>
-      </div>
-      <div class="row">
-        <label for="TimeSecs">Time left in seconds</label>
-        <input ng-model='main.features.TimeSecs' class='form-control' type="number" name="TimeSecs" value="" id='TimeSecs'>
-      </div>
-      <div class="row">
-        <button type="submit" name="complex" class='btn btn-default'>Predict Play</button>
-        <button ng-click='main.submitSimple(main.features)' type="button" name="simple" class='btn btn-default'>Predict Simple</button>
-      </div>
-    </form>
-    <div class="row">
-      <div ui-view='result'></div>
-    </div>
-  </div>
+<div flex layout='row'>
+  <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="sidenav">
+    <md-toolbar class="md-theme-light">
+      <h1 class="md-toolbar-tools">Teams:</h1>
+    </md-toolbar>
+    <md-content layout-padding>
+      <md-subheader class="md-primary">AFC North</md-subheader>
+      <md-button class='logos'>
+        <md-tooltip>Bengals</md-tooltip>
+        <img src="resources/logos/CIN.gif" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Browns</md-tooltip>
+        <img src="resources/logos/CLE.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Ravens</md-tooltip>
+        <img src="resources/logos/BAL.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Steelers</md-tooltip>
+        <img src="resources/logos/PIT.png" style="width:48px;height:auto;"/>
+      </md-button>
+
+      <md-subheader class="md-primary">AFC East</md-subheader>
+      <md-button class='logos'>
+        <md-tooltip>Bills</md-tooltip>
+        <img src="resources/logos/BUF.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Dolphins</md-tooltip>
+        <img src="resources/logos/MIA.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Jets</md-tooltip>
+        <img src="resources/logos/NYJ.gif" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Patriots</md-tooltip>
+        <img src="resources/logos/NE.gif" style="width:48px;height:auto;"/>
+      </md-button>
+
+      <md-subheader class="md-primary">AFC South</md-subheader>
+      <md-button class='logos'>
+        <md-tooltip>Colts</md-tooltip>
+        <img src="resources/logos/IND.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Jaguars</md-tooltip>
+        <img src="resources/logos/JAX.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Texans</md-tooltip>
+        <img src="resources/logos/HOU.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Titans</md-tooltip>
+        <img src="resources/logos/TEN.png" style="width:48px;height:auto;"/>
+      </md-button>
+
+      <md-subheader class="md-primary">AFC West</md-subheader>
+      <md-button class='logos'>
+        <md-tooltip>Broncos</md-tooltip>
+        <img src="resources/logos/DEN.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Chargers</md-tooltip>
+        <img src="resources/logos/SD.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Chiefs</md-tooltip>
+        <img src="resources/logos/KC.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Raiders</md-tooltip>
+        <img src="resources/logos/OAK.gif" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-subheader class="md-primary">NFC North</md-subheader>
+      <md-button class='logos'>
+        <md-tooltip>Bears</md-tooltip>
+        <img src="resources/logos/CHI.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Lions</md-tooltip>
+        <img src="resources/logos/DET.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Packers</md-tooltip>
+        <img src="resources/logos/GB.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Vikings</md-tooltip>
+        <img src="resources/logos/MIN.png" style="width:48px;height:auto;"/>
+      </md-button>
+
+      <md-subheader class="md-primary">NFC East</md-subheader>
+      <md-button class='logos'>
+        <md-tooltip>Cowboys</md-tooltip>
+        <img src="resources/logos/DAL.gif" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Eagles</md-tooltip>
+        <img src="resources/logos/PHI.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Giants</md-tooltip>
+        <img src="resources/logos/NYG.gif" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Redskins</md-tooltip>
+        <img src="resources/logos/WAS.gif" style="width:48px;height:auto;"/>
+      </md-button>
+
+      <md-subheader class="md-primary">NFC South</md-subheader>
+      <md-button class='logos'>
+        <md-tooltip>Buccaneers</md-tooltip>
+        <img src="resources/logos/TB.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Falcons</md-tooltip>
+        <img src="resources/logos/ATL.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Panthers</md-tooltip>
+        <img src="resources/logos/CAR.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Saints</md-tooltip>
+        <img src="resources/logos/NO.gif" style="width:48px;height:auto;"/>
+      </md-button>
+
+      <md-subheader class="md-primary">NFC West</md-subheader>
+      <md-button class='logos'>
+        <md-tooltip>Cardinals</md-tooltip>
+        <img src="resources/logos/ARI.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>49ers</md-tooltip>
+        <img src="resources/logos/SF.gif" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Rams</md-tooltip>
+        <img src="resources/logos/LA.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button class='logos'>
+        <md-tooltip>Seahawks</md-tooltip>
+        <img src="resources/logos/SEA.png" style="width:48px;height:auto;"/>
+      </md-button>
+      <md-button ng-click="select.close()" class="md-primary">
+        Close
+      </md-button>
+    </md-content>
+  </md-sidenav>
+
+  <md-content flex id='content'>
+    <md-button ng-click="select.toggle()"
+      ng-hide="select.isOpenRight()"
+      class="md-primary">
+      Toggle
+    </md-button>
+  </md-content>
+  <md-content>
+    
+  </md-content>
 </div>

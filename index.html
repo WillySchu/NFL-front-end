@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.css"/>
     <link rel="stylesheet" href="stylesheets/style.css">
 
@@ -20,11 +21,18 @@
 
   </head>
   <body>
-    <div ui-view='nav'></div>
-    <div ui-view='content'></div>
+
+    <div layout='column'>
+      <div ui-view='nav'></div>
+      <div ui-view='content'></div>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.0/angular-ui-router.js" charset="utf-8"></script>
     <script src="app.js" charset="utf-8"></script>
     <script src="routes.config.js" charset="utf-8"></script>
@@ -32,6 +40,7 @@
     <script src="controllers/nav.js" charset="utf-8"></script>
     <script src="controllers/login.js" charset="utf-8"></script>
     <script src="controllers/register.js" charset="utf-8"></script>
+    <script src="controllers/select.js" charset="utf-8"></script>
     <script src="services/main.js" charset="utf-8"></script>
     <script src="services/auth.js" charset="utf-8"></script>
   </body>
