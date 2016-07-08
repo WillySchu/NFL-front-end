@@ -105,14 +105,8 @@ function Main(Prediction, $state, $scope) {
     })
   }
 
-  vm.simpleSuccess = function(features) {
-    return Prediction.submit(features, 'success/simple').then(function(result) {
-      return result;
-    })
-  }
-
-  vm.complexSuccess = function(features) {
-    return Prediction.submit(features, 'success/complex').then(function(result) {
+  vm.success = function(features) {
+    return Prediction.submit(features, 'success').then(function(result) {
       return result;
     })
   }
@@ -124,7 +118,7 @@ function Main(Prediction, $state, $scope) {
       psbl.push(JSON.parse(JSON.stringify(features)));
     }
 
-    var pResults = psbl.map(vm.complexSuccess)
+    var pResults = psbl.map(vm.success)
 
     vm.sData = [{
       key: 'Success',
@@ -192,6 +186,97 @@ function Main(Prediction, $state, $scope) {
   }
 
   vm.complexSuccessAll = function(features) {
-    console.log(features);
+    var psbl = []
+
+    var plays = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 20, 30, 40]
+
+    for (var i = 0; i < plays.length; i++) {
+      features['play'] = plays[i];
+      psbl.push(JSON.parse(JSON.stringify(features)));
+    }
+
+    var pResults = psbl.map(vm.success)
+
+    vm.sData = [{
+      key: 'Success',
+      color: '#0f0',
+      values: []
+    },
+    {
+      key: 'Failure',
+      color: '#f00',
+      values: []
+    }]
+
+    names = ['Pass', 'Pass, Short Right', 'Pass, Short Middle', 'Pass, Short Left', 'Pass, Deep Right', 'Pass, Deep Middle', 'Pass, Deep Left', 'Pass, Sack', 'Run', 'Run, Right End', 'Run, Right Tackle', 'Run, Right Guard', 'Run, Middle', 'Run, Left Guard', 'Run, Left Tackle', 'Run, Left End', 'Punt', 'Field Goal', 'Run, QB Kneel'];
+
+    Promise.all(pResults).then(function(results) {
+      for (i in results) {
+        var scale = 0;
+        var res = JSON.parse(results[i]);
+        var d = vm.data[0].children;
+
+        if (names[i].slice(0, 4) === 'Pass') {
+          p = d[0].children.filter(function(play) {
+            return play.name === names[i];
+          })
+          scale = p[0].size;
+        } else if (names[i].slice(0, 3) === 'Run') {
+          p = d[1].children.filter(function(play) {
+            return play.name === names[i];
+          })
+          scale = p[0].size;
+        } else if (names[i] === 'Punt') {
+          scale = d[2].size;
+        } else {
+          scale = d[3].size;
+        }
+
+        vm.sData[0].values.push({
+          x: names[i],
+          y: res[0] * scale
+        });
+        vm.sData[1].values.push({
+          x: names[i],
+          y: res[1] * scale
+        });
+      }
+
+      vm.options = {
+        chart: {
+          type: 'multiBarChart',
+          height: 450,
+          margin : {
+            top: 20,
+            right: 20,
+            bottom: 60,
+            left: 45
+          },
+          clipEdge: true,
+          staggerLabels: true,
+          transitionDuration: 1000,
+          tooltips: true,
+          tooltipContent: function (key, x, y, e, graph) {
+            return '<p>' + key + ': ' + y + '</p>';
+          },
+          stacked: true,
+          showControls: false,
+          xAxis: {
+            axisLabel: 'Time',
+            showMaxMin: true,
+            tickFormat: function(d) {return d;}
+          },
+          yAxis: {
+            axisLabel: 'Number of emails',
+            axisLabelDistance: 100,
+            tickFormat: function(d){
+              return d3.format(',.f')(d);
+            }
+          }
+        }
+      }
+      $state.go('main.result.success');
+
+    })
   }
 }
