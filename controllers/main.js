@@ -126,8 +126,64 @@ function Main(Prediction, $state, $scope) {
 
     var pResults = psbl.map(vm.complexSuccess)
 
-    Promise.all(pResults).then(data => {
-      console.log(data);
+    vm.data = [{
+      key: 'Success',
+      color: '#0f0',
+      values: []
+    },
+    {
+      key: 'Failure',
+      color: '#f00',
+      values: []
+    }]
+
+    Promise.all(pResults).then(function(results) {
+      for (i in results) {
+        var res = JSON.parse(results[i]);
+        vm.data[0].values.push(res[0]);
+        vm.data[1].values.push(res[1]);
+      }
     })
+    console.log(vm.data);
+
+    vm.options = {
+      chart: {
+        type: 'multiBarChart',
+        height: 600,
+        margin : {
+          top: 20,
+          right: 20,
+          bottom: 60,
+          left: 45
+        },
+        clipEdge: true,
+        staggerLabels: true,
+        transitionDuration: 1000,
+        tooltips: true,
+        tooltipContent: function (key, x, y, e, graph) {
+          return '<p>' + key + ': ' + y + '</p>';
+        },
+        stacked: true,
+        showControls: false,
+        xAxis: {
+          axisLabel: 'Time',
+          showMaxMin: true,
+          tickFormat: function(d) {return d;}
+        },
+        yAxis: {
+          axisLabel: 'Number of emails',
+          axisLabelDistance: 100,
+          tickFormat: function(d){
+            return d3.format(',.f')(d);
+          }
+        }
+      }
+    }
+    vm.options.chart.tooltip.enable();
+    $state.go('main.result');
+  }
+
+  vm.complexSuccessAll = function(features) {
+    console.log(features);
   }
 }
