@@ -4,7 +4,7 @@ angular.module('app')
 
     $stateProvider
       .state('splash', {
-        url: '/',
+        url: '/welcome',
         views: {
           content: {
             templateUrl: 'partials/splash.html'
@@ -12,7 +12,7 @@ angular.module('app')
         }
       })
       .state('main', {
-        url: '/main',
+        url: '/',
         views: {
           nav: {
             templateUrl: 'partials/nav.html',
@@ -26,30 +26,41 @@ angular.module('app')
           }
         }
       })
-      .state('main.result', {
+      .state('teams', {
+        url: '/teams',
+        views: {
+          'main@main': {
+            templateUrl: 'partials/team.html'
+          }
+        }
+      })
+      .state('main.select', {
+        url: '/select',
+        views: {
+          'main@main': {
+            templateUrl: 'partials/select.html'
+          }
+        }
+      })
+      .state('main.select.result', {
         url: '/result',
         views: {
-          'result@main': {
+          'result@main.select': {
             templateUrl: 'partials/result.html'
           }
         }
       })
-      .state('main.result.success', {
+      .state('main.select.result.success', {
         url: '/success',
         views: {
-          'result@main': {
+          'result@main.main': {
             templateUrl: 'partials/success.html'
           }
         }
       })
-      .state('login', {
+      .state('main.login', {
         url: '/login',
         views: {
-          nav: {
-            templateUrl: 'partials/nav.html',
-            controller: 'Nav',
-            controllerAs: 'nav'
-          },
           'content': {
             templateUrl: 'partials/login.html',
             controller: 'Login',
@@ -57,14 +68,9 @@ angular.module('app')
           }
         }
       })
-      .state('register', {
+      .state('main.register', {
         url: '/register',
         views: {
-          nav: {
-            templateUrl: 'partials/nav.html',
-            controller: 'Nav',
-            controllerAs: 'nav'
-          },
           'content': {
             templateUrl: 'partials/login.html',
             controller: 'Register',
