@@ -1,3 +1,11 @@
 .logos:hover {
   background-color: inherit !important;
 }
+
+.inputdata {
+  padding: 20px;
+}
+
+.md-default.md-checked {
+  color: lightgrey;
+}
