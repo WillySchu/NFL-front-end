@@ -1,0 +1,20 @@
+.logos:hover {
+  background-color: inherit !important;
+}
+
+.inputdata {
+  padding: 20px;
+}
+
+.md-default.md-checked {
+  color: lightgrey;
+}
+
+.inline {
+  display: inline;
+}
+
+md-progress-circular {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}

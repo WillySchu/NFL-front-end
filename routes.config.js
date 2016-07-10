@@ -26,40 +26,44 @@ angular.module('app')
           }
         }
       })
-      .state('teams', {
-        url: '/teams',
-        views: {
-          'main@main': {
-            templateUrl: 'partials/team.html'
-          }
-        }
-      })
       .state('main.select', {
-        url: '/select',
+        url: 'select/',
         views: {
           'main@main': {
-            templateUrl: 'partials/select.html'
+            templateUrl: 'partials/select.html',
+            controller: 'Select',
+            controllerAs: 'select'
           }
         }
       })
       .state('main.select.result', {
-        url: '/result',
+        url: 'result/',
         views: {
           'result@main.select': {
-            templateUrl: 'partials/result.html'
+            templateUrl: 'partials/result.html',
+            controller: 'Result',
+            controllerAs: 'result'
           }
         }
       })
-      .state('main.select.result.success', {
-        url: '/success',
+      .state('main.select.result.pred', {
+        url: 'prediction/',
         views: {
-          'result@main.main': {
-            templateUrl: 'partials/success.html'
+          'pred@main.select.result': {
+            templateUrl: 'partials/pred.html'
+          }
+        }
+      })
+      .state('main.select.result.succ', {
+        url: 'success/',
+        views: {
+          'pred@main.select.result': {
+            templateUrl: 'partials/succ.html'
           }
         }
       })
       .state('main.login', {
-        url: '/login',
+        url: 'login/',
         views: {
           'content': {
             templateUrl: 'partials/login.html',
@@ -69,7 +73,7 @@ angular.module('app')
         }
       })
       .state('main.register', {
-        url: '/register',
+        url: 'register/',
         views: {
           'content': {
             templateUrl: 'partials/login.html',
