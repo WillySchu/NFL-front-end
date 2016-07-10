@@ -1,4 +1,4 @@
-<div class="column">
+<div class='select'>
   <div flex layout-gt-sm='row' layout-sm='column'>
     <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="sidenav">
       <md-toolbar class="md-theme-light">
@@ -170,7 +170,7 @@
           <md-radio-button value="3" class='md-primary'>Third</md-radio-button>
           <md-radio-button value="4" class='md-primary'>Fourth</md-radio-button>
         </md-radio-group>
-        <div ng-messages="form.down.$touched">
+        <div ng-if="form.down.$touched && form.down.$error.required">
           <div ng-message="required">This is required.</div>
         </div>
         <md-slider-container>

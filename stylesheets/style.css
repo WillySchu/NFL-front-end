@@ -60,3 +60,12 @@ md-content {
   margin-top: 10%;
   margin-bottom: 10%;
 }
+
+.select {
+  height: calc(100vh - 64px);
+  width: 100vw;
+  background-image: url('http://soccer-tricks.com/wp-content/uploads/2014/12/grass-background-clipart-93.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
