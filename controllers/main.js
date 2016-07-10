@@ -55,7 +55,7 @@ function Main(Prediction, $state, $scope) {
         vm.api.refresh();
       }
 
-      $state.go('main.result');
+      $state.go('main.select.result');
     })
   }
 
@@ -101,7 +101,7 @@ function Main(Prediction, $state, $scope) {
         vm.api.refresh();
       }
 
-      $state.go('main.result');
+      $state.go('main.select.result');
     })
   }
 
@@ -179,7 +179,7 @@ function Main(Prediction, $state, $scope) {
           }
         }
       }
-      $state.go('main.result.success');
+      $state.go('main.select.result.success');
     })
 
 
@@ -275,7 +275,7 @@ function Main(Prediction, $state, $scope) {
           }
         }
       }
-      $state.go('main.result.success');
+      $state.go('main.select.result.success');
 
     })
   }
