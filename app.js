@@ -1,4 +1,4 @@
-angular.module('app', ['ui.router', 'nvd3', 'ngMaterial'])
+angular.module('app', ['ui.router', 'nvd3', 'ngMaterial', 'ngMessages'])
   .run(function ($rootScope, $state, Auth) {
     $rootScope.$on('$stateChangeStart', function (event, next, current) {
       if (next.restricted && AuthService.isLoggedIn() === false) {

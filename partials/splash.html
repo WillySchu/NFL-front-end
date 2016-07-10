@@ -1,2 +1,43 @@
-<button ui-sref='login' class='btn btn-default' type="button" name="main.login">LOGIN</button>
-<button ui-sref='main.teams' class='btn btn-default' type="button" name="continue">Continue without logging in</button>
+<div class='splash' id="bg1" layout-align='center'>
+
+  <div layout='row' class="splashHeader">
+    <div flex='90'>
+      <h1>App Name</h1>
+    </div>
+    <div layout='end' flex='10' class="splashLogo">
+      <h3 class='logo'>LOGO</h3>
+    </div>
+  </div>
+
+  <div class='login' layout="column" flex='50'>
+    <md-content layout-padding>
+      <form name="loginForm" ng-submit="splash.submit(splash.loginForm)">
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input required name="email" ng-model="splash.loginForm.email">
+          <div ng-messages="loginForm.email.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Password</label>
+          <input required name="password" ng-model="splash.loginForm.password">
+          <div ng-messages="loginForm.password.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <md-button class='continue' type='submit'>Login</md-button>
+
+        <div class='splashDivider'>
+          <md-divider>
+            <h4 class='or'>OR</h4>
+          <md-divider>
+        </div>
+
+      </form>
+    </md-content>
+    <md-button class='continue' ui-sref='main.select' type="button" name="continue">Continue without logging in</md-button>
+  </div>
+
+</div>

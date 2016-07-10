@@ -22,3 +22,40 @@ md-progress-circular {
 md-content {
   background-color: inherit;
 }
+
+.splash {
+  height: 100vh;
+  width: 100vw;
+  /*padding-top: 20vh;*/
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.splashHeader {
+  height: 20vh;
+  padding: 2vh;
+  padding-left: 3vw;
+  color: #911;
+}
+
+#bg1 {
+  background-image: url('https://ninesights.ninesigma.com/GC-HEALTH-theme/images/background.jpg');
+}
+
+.login {
+  margin: auto;
+}
+
+.or {
+  opacity: 0.8;
+  text-align: center;
+}
+
+.continue {
+  width: 100%;
+}
+
+.splashDivider {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}

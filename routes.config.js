@@ -4,7 +4,7 @@ angular.module('app')
 
     $stateProvider
       .state('splash', {
-        url: '/welcome',
+        url: '/',
         views: {
           content: {
             templateUrl: 'partials/splash.html'
