@@ -18,3 +18,7 @@ md-progress-circular {
   margin-top: 200px;
   margin-bottom: 200px;
 }
+
+md-content {
+  background-color: inherit;
+}
