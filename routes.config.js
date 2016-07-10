@@ -26,14 +26,6 @@ angular.module('app')
           }
         }
       })
-      .state('teams', {
-        url: 'teams/',
-        views: {
-          'main@main': {
-            templateUrl: 'partials/team.html'
-          }
-        }
-      })
       .state('main.select', {
         url: 'select/',
         views: {
@@ -48,15 +40,25 @@ angular.module('app')
         url: 'result/',
         views: {
           'result@main.select': {
-            templateUrl: 'partials/result.html'
+            templateUrl: 'partials/result.html',
+            controller: 'Result',
+            controllerAs: 'result'
           }
         }
       })
-      .state('main.select.result.success', {
+      .state('main.select.result.pred', {
+        url: 'prediction/',
+        views: {
+          'pred@main.select.result': {
+            templateUrl: 'partials/pred.html'
+          }
+        }
+      })
+      .state('main.select.result.succ', {
         url: 'success/',
         views: {
-          'result@main.main': {
-            templateUrl: 'partials/success.html'
+          'pred@main.select.result': {
+            templateUrl: 'partials/succ.html'
           }
         }
       })

@@ -1,3 +1,10 @@
-<nvd3 options="main.options" data="main.data" api='main.api' class="with-3d-shadow with-transitions"></nvd3>
-<button ng-click='main.simpleSuccessAll(main.features)' type="button" name="success" class='btn btn-default'>Success Simple</button>
-<button ng-click='main.complexSuccessAll(main.features)' type="button" name="success" class='btn btn-default'>Success Complex</button>
+<md-content class="md-padding">
+  <md-nav-bar md-selected-nav-item="result.currentNavItem" nav-bar-aria-label="navigation links">
+    <md-nav-item md-nav-sref="main.select.result.pred" name="pred">Predict Play</md-nav-item>
+    <md-nav-item ng-click='select.goSuccess()' md-nav-sref="main.select.result.succ" name="succ">Estimate Success</md-nav-item>
+  </md-nav-bar>
+  <div layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular ng-if='select.loading' md-mode="indeterminate"></md-progress-circular>
+  </div>
+  <div ui-view='pred'>
+</md-content>
