@@ -141,7 +141,84 @@ function Graph() {
       return {sData, options};
     },
     drawCSuccess: function(succData, predData) {
-      console.log(succData, predData);
+      var sData = [{
+        key: 'Success',
+        color: '#0f0',
+        values: []
+      },
+      {
+        key: 'Failure',
+        color: '#f00',
+        values: []
+      }]
+
+      var names = ['Pass', 'Pass, Short Right', 'Pass, Short Middle', 'Pass, Short Left', 'Pass, Deep Right', 'Pass, Deep Middle', 'Pass, Deep Left', 'Pass, Sack', 'Run', 'Run, Right End', 'Run, Right Tackle', 'Run, Right Guard', 'Run, Middle', 'Run, Left Guard', 'Run, Left Tackle', 'Run, Left End', 'Punt', 'Field Goal', 'Run, QB Kneel']
+
+      for (i in succData) {
+        var scale = 0;
+        var res = JSON.parse(succData[i]);
+        var d = predData[0].children;
+
+        if (names[i].slice(0, 4) === 'Pass') {
+          p = d[0].children.filter(function(play) {
+            return play.name === names[i];
+          })
+          scale = p[0].size;
+        } else if (names[i].slice(0, 3) === 'Run') {
+          p = d[1].children.filter(function(play) {
+            return play.name === names[i];
+          })
+          scale = p[0].size;
+        } else if (names[i] === 'Punt') {
+          scale = d[2].size;
+        } else {
+          scale = d[3].size;
+        }
+
+        sData[0].values.push({
+          x: names[i],
+          y: res[0] * scale
+        });
+        sData[1].values.push({
+          x: names[i],
+          y: res[1] * scale
+        });
+      }
+
+      options = {
+        chart: {
+          type: 'multiBarChart',
+          height: 450,
+          margin : {
+            top: 20,
+            right: 20,
+            bottom: 60,
+            left: 45
+          },
+          clipEdge: true,
+          staggerLabels: true,
+          transitionDuration: 1000,
+          tooltips: true,
+          tooltipContent: function (key, x, y, e, graph) {
+            return '<p>' + key + ': ' + y + '</p>';
+          },
+          stacked: true,
+          showControls: false,
+          xAxis: {
+            axisLabel: 'Time',
+            showMaxMin: true,
+            tickFormat: function(d) {return d;}
+          },
+          yAxis: {
+            axisLabel: 'Number of emails',
+            axisLabelDistance: 100,
+            tickFormat: function(d){
+              return d3.format(',.f')(d);
+            }
+          }
+        }
+      }
+      return {sData, options};
     }
   }
 }

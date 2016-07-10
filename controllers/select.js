@@ -89,7 +89,13 @@ function Select($state, $mdSidenav, Prediction, Graph) {
         var pResults = psbl.map(success)
 
         Promise.all(pResults).then(function(data) {
-          console.log(data);
+          var res = Graph.drawCSuccess(data, vm.data);
+
+          vm.sData = res.sData;
+          vm.sOptions = res.options;
+
+          vm.loading = false;
+          $state.go('main.select.result.succ');
         })
     } else {
 
