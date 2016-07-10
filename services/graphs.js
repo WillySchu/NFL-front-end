@@ -17,7 +17,7 @@ function Graph() {
       options = {
         chart: {
           type: 'pieChart',
-          height: 500,
+          height: 450,
           donut: true,
           x: function(d){return d.key;},
           y: function(d){return d.y;},

@@ -59,13 +59,8 @@ function Select($state, $mdSidenav, Prediction, Graph) {
       var ext = 'pred/simple';
     }
 
-    console.log(vm.features);
-
     Prediction.submit(vm.features, ext).then(function(data) {
-      console.log(data);
       var res = Graph.drawSimple(JSON.parse(data))
-
-      console.log(res);
 
       vm.data = res.data;
       vm.options = res.options;
@@ -73,13 +68,10 @@ function Select($state, $mdSidenav, Prediction, Graph) {
       vm.loading = false;
       $state.go('main.select.result.pred');
     })
-
   }
 
   vm.success = function(features) {
     vm.loading = true;
-
-    $state.go('main.select.result');
 
     var psbl = []
 
@@ -91,10 +83,7 @@ function Select($state, $mdSidenav, Prediction, Graph) {
     var pResults = psbl.map(success)
 
     Promise.all(pResults).then(function(data) {
-      console.log(data);
       var res = Graph.drawSuccess(data, vm.data);
-
-      console.log(res);
 
       vm.sData = res.sData;
       vm.sOptions = res.options;
