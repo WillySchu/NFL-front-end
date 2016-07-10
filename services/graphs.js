@@ -39,7 +39,47 @@ function Graph() {
       }
       return {data: fResult, options};
     },
-    drawSuccess: function(succData, predData) {
+    drawComplex: function(data) {
+      var fResult = [
+        {name: 'Pass', size: 0, children: []},
+        {name: 'Run', size: 0, children: []}
+      ]
+
+      var names = ['Pass', 'Pass, Short Right', 'Pass, Short Middle', 'Pass, Short Left', 'Pass, Deep Right', 'Pass, Deep Middle', 'Pass, Deep Left', 'Pass, Sack', 'Run', 'Run, Right End', 'Run, Right Tackle', 'Run, Right Guard', 'Run, Middle', 'Run, Left Guard', 'Run, Left Tackle', 'Run, Left End', 'Punt', 'Field Goal', 'Run, QB Kneel']
+
+      for (i in data) {
+        var plays = {'name': names.shift(), 'size': data[i]}
+
+        plays.size = Math.round(plays.size * 10000) / 100;
+
+        if (plays.name.slice(0, 4) == 'Pass'){
+          fResult[0].size += plays.size;
+          fResult[0].children.push(plays);
+        } else if (plays.name.slice(0, 3) == 'Run') {
+          fResult[1].size += plays.size;
+          fResult[1].children.push(plays);
+        } else {
+          fResult.push(plays);
+        }
+      }
+
+      var result = [{
+        name: 'Plays',
+        children: fResult
+      }]
+
+      var options = {
+        chart: {
+          type: 'sunburstChart',
+          height: 450,
+          color: d3.scale.category10(),
+          duration: 250,
+          mode: 'size'
+        }
+      }
+      return {data: result, options};
+    },
+    drawSSuccess: function(succData, predData) {
       sData = [{
         key: 'Success',
         color: '#0f0',
@@ -99,6 +139,9 @@ function Graph() {
         }
       }
       return {sData, options};
+    },
+    drawCSuccess: function(succData, predData) {
+      console.log(succData, predData);
     }
   }
 }

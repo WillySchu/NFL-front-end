@@ -6,12 +6,6 @@ Main.$inject = ['$state', '$mdSidenav', 'Prediction', 'Graph'];
 function Select($state, $mdSidenav, Prediction, Graph) {
   var vm = this;
 
-  function success(features) {
-    return Prediction.submit(features, 'success').then(function(result) {
-      return result;
-    })
-  }
-
   vm.features = {};
 
   vm.complexity = 'Simple';
@@ -44,6 +38,7 @@ function Select($state, $mdSidenav, Prediction, Graph) {
   vm.submit = function() {
     vm.loading = true;
     vm.sData = null;
+    vm.sComplexity = vm.complexity
     if (vm.winning === 'md-warn') {
       vm.features.ScoreDiff = vm.score * -1;
     } else if (vm.winning === '') {
@@ -55,12 +50,14 @@ function Select($state, $mdSidenav, Prediction, Graph) {
 
     if (vm.complexity === 'Advanced') {
       var ext = 'pred/complex';
+      var draw = Graph.drawComplex;
     } else {
       var ext = 'pred/simple';
+      var draw = Graph.drawSimple;
     }
 
     Prediction.submit(vm.features, ext).then(function(data) {
-      var res = Graph.drawSimple(JSON.parse(data))
+      var res = draw(JSON.parse(data))
 
       vm.data = res.data;
       vm.options = res.options;
@@ -71,26 +68,49 @@ function Select($state, $mdSidenav, Prediction, Graph) {
   }
 
   vm.success = function(features) {
-    vm.loading = true;
-
-    var psbl = []
-
-    for (var i = 0; i < 4; i++) {
-      features['play'] = i;
-      psbl.push(JSON.parse(JSON.stringify(features)));
+    function success(features) {
+      return Prediction.submit(features, 'success').then(function(result) {
+        return result;
+      })
     }
 
-    var pResults = psbl.map(success)
+    vm.loading = true;
+    var psbl = []
 
-    Promise.all(pResults).then(function(data) {
-      var res = Graph.drawSuccess(data, vm.data);
+    if (vm.sComplexity === 'Advanced') {
 
-      vm.sData = res.sData;
-      vm.sOptions = res.options;
+      var plays = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 17, 20, 30, 40]
 
-      vm.loading = false;
-      $state.go('main.select.result.succ');
-    })
+      for (var i = 0; i < plays.length; i++) {
+        features['play'] = plays[i];
+        psbl.push(JSON.parse(JSON.stringify(features)));
+      }
+
+        var pResults = psbl.map(success)
+
+        Promise.all(pResults).then(function(data) {
+          console.log(data);
+        })
+    } else {
+
+      for (var i = 0; i < 4; i++) {
+        features['play'] = i;
+        psbl.push(JSON.parse(JSON.stringify(features)));
+      }
+
+      var pResults = psbl.map(success)
+
+      Promise.all(pResults).then(function(data) {
+        var res = Graph.drawSSuccess(data, vm.data);
+
+        vm.sData = res.sData;
+        vm.sOptions = res.options;
+
+        vm.loading = false;
+        $state.go('main.select.result.succ');
+      })
+    }
+
   }
 
   vm.goSuccess = function() {
