@@ -68,7 +68,7 @@ function Select($state, $mdSidenav, Prediction, Graph) {
   }
 
   vm.success = function(features) {
-    function success(features) {
+    function drawSuccess(features) {
       return Prediction.submit(features, 'success').then(function(result) {
         return result;
       })
@@ -86,7 +86,7 @@ function Select($state, $mdSidenav, Prediction, Graph) {
         psbl.push(JSON.parse(JSON.stringify(features)));
       }
 
-        var pResults = psbl.map(success)
+        var pResults = psbl.map(drawSuccess)
 
         Promise.all(pResults).then(function(data) {
           var res = Graph.drawCSuccess(data, vm.data);
