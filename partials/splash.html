@@ -27,7 +27,11 @@
           </div>
         </md-input-container>
 
-        <md-button class='continue' type='submit'>Login</md-button>
+        <div ng-show='splash.error' class="error">
+          {{splash.errorMessage}}
+        </div>
+
+        <md-button disabled='{{splash.disabled}}' class='continue' type='submit'>Login</md-button>
 
         <div class='splashDivider'>
           <md-divider>
