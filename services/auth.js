@@ -5,7 +5,7 @@ Auth.$inject = ['$q', '$timeout', '$http']
 
 function Auth($q, $timeout, $http) {
   var user = null;
-  const devUrl = 'http://192.168.1.123:5000/api/';
+  const devUrl = 'http://10.5.82.83:5000/api/';
   const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/api/';
   const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/api/';
 
