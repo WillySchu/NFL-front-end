@@ -22,9 +22,7 @@ angular.module('app')
             controllerAs: 'nav'
           },
           content: {
-            templateUrl: 'partials/main.html',
-            controller: 'Main',
-            controllerAs: 'main'
+            templateUrl: 'partials/main.html'
           }
         }
       })

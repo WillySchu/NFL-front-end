@@ -1,5 +1,5 @@
 <md-toolbar>
-  <div class="md-toolbar-tools" ng-hide="showSearchBarDiv">
+  <div class="md-toolbar-tools">
     <md-button ui-sref='main.select' class="md-icon-button" aria-label="Icon">
       <md-tooltip>Icon</md-tooltip>
       <md-icon class="md-default-theme" md-svg-icon="fb.svg"></md-icon>
@@ -7,5 +7,27 @@
     <h2>
       <span>Heading</span>
     </h2>
+    <span flex></span>
+    <md-button class='toggleNav' ng-show='nav.displayLoginButton' ng-show='!nav.isUser' ng-click='nav.toggleLogin()'>
+      Login
+    </md-button>
+    <div layout='row' class='navLogin' ng-show='nav.displayLogin' data-animation='am-slide-right'>
+      <form name='loginForm' submit='nav.login(nav.loginForm)'>
+        <md-button class='navLoginButton' ng-show='!nav.isUser' ng-click='nav.toggleLogin()'>
+          Close
+        </md-button>
+        <md-input-container>
+          <label>Email</label>
+          <input ng-model='nav.loginForm.email' required type="text"/>
+        </md-input-container>
+        <md-input-container>
+          <label>Password</label>
+          <input ng-model='nav.loginForm.password' required type="password"/>
+        </md-input-container>
+        <md-button class='navLoginButton' type='submit' ng-click='nav.login(nav.loginForm)'>
+          Login
+        </md-button>
+      </form>
+    </div>
   </div>
 </md-toolbar>

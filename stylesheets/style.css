@@ -72,3 +72,25 @@ md-content {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.navLogin {
+  padding: 2px;
+  margin: 24px 0 0 0;
+  font-size: 12px;
+}
+
+.navLoginButton {
+  height: 36px;
+  padding: 0 6px;
+  margin: 6px 8px;
+  vertical-align: 10px;
+}
+
+
+.navLogin.ng-hide-remove {
+ animation: fadeInRight 0.5s;
+}
+
+.navLogin.ng-hide-add {
+  animation: fadeOutRight 0.5s
+}

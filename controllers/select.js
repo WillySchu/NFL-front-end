@@ -1,7 +1,7 @@
 angular.module('app')
   .controller('Select', Select)
 
-Main.$inject = ['$scope', '$state', '$mdSidenav', 'Prediction', 'Graph'];
+Select.$inject = ['$scope', '$state', '$mdSidenav', 'Prediction', 'Graph'];
 
 function Select($scope, $state, $mdSidenav, Prediction, Graph) {
   var vm = this;
