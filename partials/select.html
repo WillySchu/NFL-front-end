@@ -12,6 +12,10 @@
         </md-button>
       </md-content>
 
+      <div ng-if'select.error' class='error'>
+        {{select.error}}
+      </div>
+
       <form name='form' ng-submit='select.submit()'>
         <label class='md-body-2' for="down">Down</label>
         <md-radio-group name='down' ng-required='true' ng-model='select.features.down' id='down' layout='row'>
@@ -20,9 +24,6 @@
           <md-radio-button value="3" class='md-primary'>Third</md-radio-button>
           <md-radio-button value="4" class='md-primary'>Fourth</md-radio-button>
         </md-radio-group>
-        <div ng-if="form.down.$touched && form.down.$error.required">
-          <div ng-message="required">This is required.</div>
-        </div>
         <md-slider-container>
           <span class="md-body-2">Yards to go</span>
           <md-slider flex ng-model="select.features.ydstogo" min="1" max="10" aria-label="Yards to go" id="ydstogo" class="md-primary">

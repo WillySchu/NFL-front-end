@@ -36,9 +36,16 @@ function Select($scope, $state, $mdSidenav, Prediction, Graph) {
   }
 
   vm.submit = function() {
+    vm.error = null;
     vm.loading = true;
     vm.sData = null;
     vm.sComplexity = vm.complexity
+
+    if (!vm.features.posteamint && vm.features.posteamint !== 0) {
+      vm.error = 'Please select a team';
+      return
+    }
+
     if (vm.winning === 'md-warn') {
       vm.features.ScoreDiff = vm.score * -1;
     } else if (vm.winning === '') {
@@ -64,6 +71,8 @@ function Select($scope, $state, $mdSidenav, Prediction, Graph) {
 
       vm.loading = false;
       $state.go('main.select.result.pred');
+    }).catch(function(err) {
+      vm.error = 'All fields are required';
     })
   }
 
