@@ -1,19 +1,23 @@
 angular.module('app')
   .controller('Nav', Nav)
 
-Nav.$inject = ['$timeout', '$state', 'Auth'];
+Nav.$inject = ['$scope', '$timeout', '$state', 'Auth'];
 
-function Nav($timeout, $state, Auth) {
+function Nav($scope, $timeout, $state, Auth) {
   const vm = this;
   vm.loginForm = {};
   vm.displayLogin = false;
   vm.displayLoginButton = true;
+  vm.displayLogout = false;
   vm.toggleButton = 'login';
 
   vm.isUser = Auth.isLoggedIn();
 
   vm.toggleLogin = function() {
     vm.displayLogin = !vm.displayLogin;
+
+    vm.loginForm = {};
+    $scope.navForm.$setPristine();
 
     if (vm.toggleButton === 'login') {
       vm.toggleButton = 'close';
@@ -31,13 +35,28 @@ function Nav($timeout, $state, Auth) {
   }
 
   vm.login = function(form) {
-    console.log(form);
+    vm.disabled = true;
+
+    Auth.login(form).then(function(data) {
+      console.log(data);
+      vm.disabled = false;
+      vm.loginForm = {};
+      vm.displayLogin = false;
+      vm.isUser = Auth.isLoggedIn();
+      $timeout(function(){
+        vm.displayLogout = true;
+      }, 500);
+    }).catch(function(error) {
+      vm.disabled = false;
+      vm.loginForm = {};
+    })
   }
 
   vm.logout = function() {
     Auth.logout().then(function() {
-      nav.isUser = false;
-      $state.go('main');
+      vm.isUser = false;
+      vm.displayLogout = false;
+      vm.displayLoginButton = true;
     })
   }
 }
