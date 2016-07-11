@@ -7,7 +7,9 @@ angular.module('app')
         url: '/',
         views: {
           content: {
-            templateUrl: 'partials/splash.html'
+            templateUrl: 'partials/splash.html',
+            controller: 'Splash',
+            controllerAs: 'splash'
           }
         }
       })
