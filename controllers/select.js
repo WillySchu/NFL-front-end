@@ -1,9 +1,9 @@
 angular.module('app')
   .controller('Select', Select)
 
-Main.$inject = ['$state', '$mdSidenav', 'Prediction', 'Graph'];
+Main.$inject = ['$scope', '$state', '$mdSidenav', 'Prediction', 'Graph'];
 
-function Select($state, $mdSidenav, Prediction, Graph) {
+function Select($scope, $state, $mdSidenav, Prediction, Graph) {
   var vm = this;
 
   vm.features = {};
@@ -96,6 +96,7 @@ function Select($state, $mdSidenav, Prediction, Graph) {
 
           vm.loading = false;
           $state.go('main.select.result.succ');
+          $scope.$apply();
         })
     } else {
 
@@ -104,7 +105,7 @@ function Select($state, $mdSidenav, Prediction, Graph) {
         psbl.push(JSON.parse(JSON.stringify(features)));
       }
 
-      var pResults = psbl.map(success)
+      var pResults = psbl.map(drawSuccess)
 
       Promise.all(pResults).then(function(data) {
         var res = Graph.drawSSuccess(data, vm.data);
@@ -114,6 +115,7 @@ function Select($state, $mdSidenav, Prediction, Graph) {
 
         vm.loading = false;
         $state.go('main.select.result.succ');
+        $scope.$apply();
       })
     }
 

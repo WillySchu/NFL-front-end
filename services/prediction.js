@@ -4,7 +4,7 @@ angular.module('app')
 Prediction.$inject = ['$http']
 
 function Prediction($http) {
-  const devUrl = 'http://10.5.82.83:5000/api/';
+  const devUrl = 'http://10.5.66.15:5000/api/';
   const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/api/';
   const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/api/';
   return {
