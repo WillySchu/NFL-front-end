@@ -13,6 +13,10 @@ function Nav($scope, $timeout, $state, Auth) {
 
   vm.isUser = Auth.isLoggedIn();
 
+  if (vm.isUser) {
+    vm.user = Auth.getUser();
+  }
+
   vm.toggleLogin = function() {
     vm.displayLogin = !vm.displayLogin;
 
@@ -43,6 +47,7 @@ function Nav($scope, $timeout, $state, Auth) {
       vm.loginForm = {};
       vm.displayLogin = false;
       vm.isUser = Auth.isLoggedIn();
+      vm.user = Auth.getUser();
       $timeout(function(){
         vm.displayLogout = true;
       }, 500);

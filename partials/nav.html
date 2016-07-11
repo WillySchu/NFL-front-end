@@ -11,9 +11,12 @@
     <md-button class='toggleNav' ng-show='nav.displayLoginButton' ng-show='!nav.isUser' ng-click='nav.toggleLogin()'>
       Login
     </md-button>
-    <md-button class='logout' ng-show='nav.displayLogout' ng-click='nav.logout()'>
-      Logout
-    </md-button>
+    <div ng-show='nav.displayLogout'>
+      <span>{{nav.user.email}}</span>
+      <md-button class='logout'  ng-click='nav.logout()'>
+        Logout
+      </md-button>
+    </div>
     <div layout='row' class='navLogin' ng-show='nav.displayLogin' data-animation='am-slide-right'>
       <form name='navForm' submit='nav.login(nav.loginForm)'>
         <md-button class='navLoginButton' ng-click='nav.toggleLogin()'>

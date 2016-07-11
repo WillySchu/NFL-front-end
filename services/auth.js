@@ -13,7 +13,8 @@ function Auth($q, $timeout, $http) {
     isLoggedIn: isLoggedIn,
     login: login,
     logout: logout,
-    register: register
+    register: register,
+    getUser: getUser
   }
 
   function isLoggedIn() {
@@ -24,22 +25,25 @@ function Auth($q, $timeout, $http) {
     }
   }
 
+  function getUser() {
+    return user;
+  }
+
   function login(info) {
     const deferred = $q.defer();
 
     $http.post(devUrl + 'login', info)
       .then(function(data) {
         console.log(data);
-        if (data.status === 200 && data.data.result) {
-          user = true;
+        if (data.status === 200 && data.data) {
+          user = data.data;
           deferred.resolve();
         } else {
-          user = false;
           deferred.reject();
         }
       })
       .catch(function(data) {
-        user = false;
+        user = null;
         deferred.reject();
       })
     return deferred.promise;
@@ -50,11 +54,11 @@ function Auth($q, $timeout, $http) {
 
     $http.get(devUrl + 'logout')
       .then(function(data) {
-        user = false;
+        user = null;
         deferred.resolve();
       })
       .catch(function(data) {
-        user = false;
+        user = null;
         deferred.reject();
       })
     return deferred.promise;
