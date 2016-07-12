@@ -33,7 +33,7 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
   function login(info) {
     const deferred = $q.defer();
 
-    $http.post(devUrl + 'login', info)
+    $http.post(stageUrl + 'login', info)
       .then(function(data) {
         if (data.status === 200 && data.data) {
           user = data.data;
@@ -56,7 +56,7 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
   function logout() {
     const deferred = $q.defer();
 
-    $http.get(devUrl + 'logout')
+    $http.get(stageUrl + 'logout')
       .then(function(data) {
         user = null;
         delete $window.sessionStorage.token;
@@ -73,7 +73,7 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
   function register(info) {
     const deferred = $q.defer();
 
-    $http.post(devUrl + 'register', info)
+    $http.post(stageUrl + 'register', info)
       .then(function(data) {
         if (data.status === 200 && data.data) {
           user = data.data;
@@ -99,7 +99,7 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
         res(false);
       })
     }
-    return $http.post(devUrl + 'status', {token: $window.sessionStorage.token}).then(function(data) {
+    return $http.post(stageUrl + 'status', {token: $window.sessionStorage.token}).then(function(data) {
       if (data) {
         user = data.data;
       }
@@ -108,7 +108,7 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
 
   function updateTeam(team) {
     if (isLoggedIn()) {
-      return $http.post(devUrl + 'updateteam', {token: $window.sessionStorage.token, team}).then(function(data) {
+      return $http.post(stageUrl + 'updateteam', {token: $window.sessionStorage.token, team}).then(function(data) {
         return user.favteam = data.data;
       })
     } else {
