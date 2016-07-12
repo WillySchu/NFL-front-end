@@ -6,12 +6,12 @@ Graph.$inject = [];
 function Graph() {
   return {
     drawSimple: function(data) {
-      var fResult = []
+      var fResult = [];
 
       names = ['Pass', 'Run', 'Punt', 'Field Goal'];
 
       for (i in data) {
-        fResult.push({key: names[i], y: data[i]})
+        fResult.push({key: names[i], y: data[i]});
       }
 
       options = {

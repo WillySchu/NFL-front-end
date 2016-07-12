@@ -13,8 +13,6 @@ function Nav($scope, $timeout, $state, Auth) {
 
   vm.isUser = Auth.isLoggedIn();
 
-  console.log(vm.isUser);
-
   if (vm.isUser) {
     vm.user = Auth.getUser();
     vm.displayLoginButton = false;
