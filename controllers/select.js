@@ -1,9 +1,9 @@
 angular.module('app')
   .controller('Select', Select)
 
-Select.$inject = ['$q', '$scope', '$state', '$mdSidenav', 'Prediction', 'Graph'];
+Select.$inject = ['$q', '$scope', '$state', '$mdSidenav', 'Prediction', 'Graph', 'Auth'];
 
-function Select($q, $scope, $state, $mdSidenav, Prediction, Graph) {
+function Select($q, $scope, $state, $mdSidenav, Prediction, Graph, Auth) {
   var vm = this;
 
   vm.features = {};
@@ -30,6 +30,9 @@ function Select($q, $scope, $state, $mdSidenav, Prediction, Graph) {
     if (team) {
       vm.team = team;
       vm.features.posteamint = teams[vm.team];
+      Auth.updateTeam(team).then(function(data) {
+        console.log(data);
+      })
     }
 
     $mdSidenav('sidenav').close();

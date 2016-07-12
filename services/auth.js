@@ -14,7 +14,8 @@ function Auth($window, $q, $timeout, $http) {
     logout: logout,
     register: register,
     getUser: getUser,
-    getUserStatus: getUserStatus
+    getUserStatus: getUserStatus,
+    updateTeam: updateTeam
   }
 
   function isLoggedIn() {
@@ -104,5 +105,18 @@ function Auth($window, $q, $timeout, $http) {
         user = data.data;
       }
     })
+  }
+
+  function updateTeam(team) {
+    if (isLoggedIn()) {
+      return $http.post(devUrl + 'updateteam', {token: $window.sessionStorage.token, team}).then(function(data) {
+        console.log(data);
+        return user.favteam = data.data;
+      })
+    } else {
+      return $q(function(res, rej) {
+        return res(false);
+      })
+    }
   }
 }
