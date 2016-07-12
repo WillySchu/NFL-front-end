@@ -18,7 +18,7 @@ function Auth($window, $q, $timeout, $http) {
   }
 
   function isLoggedIn() {
-    if (user) {
+    if ($window.sessionStorage.token) {
       return true;
     } else {
       return false;
@@ -34,12 +34,10 @@ function Auth($window, $q, $timeout, $http) {
 
     $http.post(devUrl + 'login', info)
       .then(function(data) {
-        console.log(data);
         if (data.status === 200 && data.data) {
           user = data.data;
           $window.sessionStorage.token = user.token;
           delete user.token;
-          console.log(user);
           deferred.resolve();
         } else {
           deferred.reject();
@@ -75,14 +73,18 @@ function Auth($window, $q, $timeout, $http) {
 
     $http.post(devUrl + 'register', info)
       .then(function(data) {
-        console.log(data);
-        if (data.status === 200 && data.data.result) {
+        if (data.status === 200 && data.data) {
+          user = data.data;
+          $window.sessionStorage.token = user.token;
+          delete user.token;
           deferred.resolve();
         } else {
           deferred.reject();
         }
       })
       .catch(function(data) {
+        user = null;
+        delete $window.sessionStorage.token;
         deferred.reject();
       })
     return deferred.promise;
