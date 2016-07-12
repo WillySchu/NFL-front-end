@@ -45,8 +45,7 @@ function Nav($scope, $timeout, $state, Auth) {
   vm.login = function(form) {
     vm.disabled = true;
 
-    Auth.login(form).then(function(data) {
-      console.log(data);
+    Auth.login(form).then(function() {
       vm.disabled = false;
       vm.loginForm = {};
       vm.displayLogin = false;

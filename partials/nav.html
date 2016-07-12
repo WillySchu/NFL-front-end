@@ -11,7 +11,7 @@
     <md-button class='toggleNav' ng-show='nav.displayLoginButton' ng-show='!nav.isUser' ng-click='nav.toggleLogin()'>
       Login
     </md-button>
-    <div ng-show='nav.displayLogout'>
+    <div class='currentUser' ng-show='nav.displayLogout'>
       <span>{{nav.user.email}}</span>
       <md-button class='logout'  ng-click='nav.logout()'>
         Logout

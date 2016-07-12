@@ -8,13 +8,14 @@ function Auth($window, $q, $timeout, $http) {
   const devUrl = 'http://10.5.82.83:5000/api/';
   const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/api/';
   const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/api/';
-
+  console.log(user);
   return {
     isLoggedIn: isLoggedIn,
     login: login,
     logout: logout,
     register: register,
-    getUser: getUser
+    getUser: getUser,
+    getUserStatus: getUserStatus
   }
 
   function isLoggedIn() {
@@ -88,5 +89,20 @@ function Auth($window, $q, $timeout, $http) {
         deferred.reject();
       })
     return deferred.promise;
+  }
+
+  function getUserStatus() {
+    if (!$window.sessionStorage.token) {
+      user = null;
+      return $q(function(res, rej) {
+        res(false);
+      })
+    }
+    return $http.post(devUrl + 'status', {token: $window.sessionStorage.token}).then(function(data) {
+      if (data) {
+        console.log(data.data);
+        user = data.data;
+      }
+    })
   }
 }

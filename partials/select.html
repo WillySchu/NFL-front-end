@@ -6,6 +6,10 @@
 
     <div class='inputdata' layout='column'>
       <md-content flex id='content'>
+        <md-button ng-show='select.team' class='logos'>
+          <md-tooltip>{{select.team}}</md-tooltip>
+          <img ng-src={{"resources/logos/" + select.team +".gif"}} style="width:48px;height:auto;"/>
+        </md-button>
         <md-button ng-click="select.toggle()"
         class="md-primary">
         {{select.team || 'Select a team'}}
