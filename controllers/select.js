@@ -6,6 +6,20 @@ Select.$inject = ['$q', '$scope', '$state', '$mdSidenav', 'Prediction', 'Graph',
 function Select($q, $scope, $state, $mdSidenav, Prediction, Graph, Auth) {
   var vm = this;
 
+  if (Auth.isLoggedIn()) {
+    var user = Auth.getUser()
+    if (user.favteam) {
+      vm.team = user.favteam;
+    }
+  }
+
+  $scope.$on('login', function(e, user) {
+    if (user.favteam) {
+      vm.team = user.favteam;
+    }
+  })
+
+
   vm.features = {};
 
   vm.complexity = 'Simple';

@@ -1,9 +1,9 @@
 angular.module('app')
   .factory('Auth', Auth)
 
-Auth.$inject = ['$window', '$q', '$timeout', '$http']
+Auth.$inject = ['$rootScope', '$window', '$q', '$timeout', '$http']
 
-function Auth($window, $q, $timeout, $http) {
+function Auth($rootScope, $window, $q, $timeout, $http) {
   var user = null;
   const devUrl = 'http://10.5.82.83:5000/api/';
   const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/api/';
@@ -39,6 +39,7 @@ function Auth($window, $q, $timeout, $http) {
           user = data.data;
           $window.sessionStorage.token = user.token;
           delete user.token;
+          $rootScope.$broadcast('login', user)
           deferred.resolve();
         } else {
           deferred.reject();
