@@ -62,16 +62,6 @@ angular.module('app')
           }
         }
       })
-      .state('main.login', {
-        url: 'login/',
-        views: {
-          'content': {
-            templateUrl: 'partials/login.html',
-            controller: 'Login',
-            controllerAs: 'login'
-          }
-        }
-      })
       .state('main.register', {
         url: 'register/',
         views: {
