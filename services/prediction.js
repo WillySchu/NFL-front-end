@@ -9,7 +9,7 @@ function Prediction($http) {
   const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/api/';
   return {
     submit: function(features, ext) {
-      return $http.post(stageUrl + ext, features).then(function(data) {
+      return $http.post(devUrl + ext, features).then(function(data) {
         return data.data;
       })
     }

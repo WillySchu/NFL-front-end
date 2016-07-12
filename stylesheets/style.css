@@ -86,6 +86,12 @@ md-content {
   vertical-align: 10px;
 }
 
+.navOr {
+  padding: 0 6px;
+  margin: 6px 8px;
+  vertical-align: 10px;
+}
+
 .currentUser {
   font-size: 12px;
 }

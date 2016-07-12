@@ -17,8 +17,8 @@
         Logout
       </md-button>
     </div>
-    <div layout='row' class='navLogin' ng-show='nav.displayLogin' data-animation='am-slide-right'>
-      <form name='navForm' submit='nav.login(nav.loginForm)'>
+    <div layout='row' class='navLogin' ng-show='nav.displayLogin'>
+      <form name='navForm' ng-submit='nav.login(nav.loginForm)'>
         <md-button class='navLoginButton' ng-click='nav.toggleLogin()'>
           Close
         </md-button>
@@ -30,8 +30,12 @@
           <label>Password</label>
           <input ng-model='nav.loginForm.password' required type="password"/>
         </md-input-container>
-        <md-button class='navLoginButton' type='submit' ng-click='nav.login(nav.loginForm)' ng-disabled='nav.disabled'>
+        <md-button class='navLoginButton' type='submit' ng-disabled='nav.disabled'>
           Login
+        </md-button>
+        <span class='navOr'>-OR-</span>
+        <md-button class='navLoginButton' type='button'>
+          Register
         </md-button>
       </form>
     </div>

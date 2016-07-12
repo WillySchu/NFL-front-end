@@ -33,7 +33,7 @@ function Auth($window, $q, $timeout, $http) {
   function login(info) {
     const deferred = $q.defer();
 
-    $http.post(stageUrl + 'login', info)
+    $http.post(devUrl + 'login', info)
       .then(function(data) {
         if (data.status === 200 && data.data) {
           user = data.data;
@@ -55,7 +55,7 @@ function Auth($window, $q, $timeout, $http) {
   function logout() {
     const deferred = $q.defer();
 
-    $http.get(stageUrl + 'logout')
+    $http.get(devUrl + 'logout')
       .then(function(data) {
         user = null;
         delete $window.sessionStorage.token;
@@ -72,7 +72,7 @@ function Auth($window, $q, $timeout, $http) {
   function register(info) {
     const deferred = $q.defer();
 
-    $http.post(stageUrl + 'register', info)
+    $http.post(devUrl + 'register', info)
       .then(function(data) {
         if (data.status === 200 && data.data) {
           user = data.data;
