@@ -9,6 +9,7 @@ function Nav($scope, $timeout, $state, Auth) {
   vm.displayLogin = false;
   vm.displayLoginButton = true;
   vm.displayLogout = false;
+  vm.registering = false;
   vm.toggleButton = 'login';
 
   vm.isUser = Auth.isLoggedIn();
@@ -21,6 +22,7 @@ function Nav($scope, $timeout, $state, Auth) {
 
   vm.toggleLogin = function() {
     vm.displayLogin = !vm.displayLogin;
+    vm.registering = false;
 
     vm.loginForm = {};
     $scope.navForm.$setPristine();
@@ -43,19 +45,48 @@ function Nav($scope, $timeout, $state, Auth) {
   vm.login = function(form) {
     vm.disabled = true;
 
-    Auth.login(form).then(function() {
-      vm.disabled = false;
-      vm.loginForm = {};
-      vm.displayLogin = false;
-      vm.isUser = Auth.isLoggedIn();
-      vm.user = Auth.getUser();
-      $timeout(function(){
-        vm.displayLogout = true;
-      }, 500);
-    }).catch(function(error) {
-      vm.disabled = false;
-      vm.loginForm = {};
-    })
+    console.log(form);
+
+    if (form.confirmPassword) {
+      console.log(form);
+      if (form.password != form.confirmPassword) {
+        console.log(form.password);
+        vm.disabled = false;
+        vm.loginForm = {};
+      } else {
+        delete form.confirmPassword;
+        console.log(form);
+        Auth.register(form).then(function() {
+          vm.disabled = false;
+          vm.loginForm = {};
+          vm.displayLogin = false;
+          vm.registering = false;
+          vm.isUser = Auth.isLoggedIn();
+          vm.user = Auth.getUser();
+          $timeout(function(){
+            vm.displayLogout = true;
+          }, 500);
+        }).catch(function(err) {
+          vm.disabled = false;
+          vm.loginForm = {};
+        })
+      }
+    } else {
+      Auth.login(form).then(function() {
+        vm.disabled = false;
+        vm.loginForm = {};
+        vm.displayLogin = false;
+        vm.isUser = Auth.isLoggedIn();
+        vm.user = Auth.getUser();
+        $timeout(function(){
+          vm.displayLogout = true;
+        }, 500);
+      }).catch(function(error) {
+        vm.disabled = false;
+        vm.loginForm = {};
+      })
+    }
+
   }
 
   vm.logout = function() {
@@ -64,5 +95,9 @@ function Nav($scope, $timeout, $state, Auth) {
       vm.displayLogout = false;
       vm.displayLoginButton = true;
     })
+  }
+
+  vm.toggleRegister = function() {
+    vm.registering = !vm.registering;
   }
 }

@@ -30,13 +30,24 @@
           <label>Password</label>
           <input ng-model='nav.loginForm.password' required type="password"/>
         </md-input-container>
-        <md-button class='navLoginButton' type='submit' ng-disabled='nav.disabled'>
-          Login
-        </md-button>
-        <span class='navOr'>-OR-</span>
-        <md-button class='navLoginButton' type='button'>
-          Register
-        </md-button>
+        <div class='inline' ng-hide='nav.registering'>
+          <md-button class='navLoginButton' type='submit' ng-disabled='nav.disabled'>
+            Login
+          </md-button>
+          <span class='navOr'>-OR-</span>
+          <md-button ng-click='nav.toggleRegister()' class='navLoginButton' type='button'>
+            Register
+          </md-button>
+        </div>
+        <div class='inline' ng-if='nav.registering'>
+          <md-input-container>
+            <label>Confirm Password</label>
+            <input ng-model='nav.loginForm.confirmPassword' required type="confirmPassword"/>
+          </md-input-container>
+          <md-button class='navLoginButton' type='submit' ng-disabled='nav.disabled'>
+            Register
+          </md-button>
+        </div>
       </form>
     </div>
   </div>
