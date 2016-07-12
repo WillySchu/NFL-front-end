@@ -7,10 +7,12 @@ function Select($q, $scope, $state, $mdSidenav, Prediction, Graph, Auth) {
   var vm = this;
 
   if (Auth.isLoggedIn()) {
-    var user = Auth.getUser()
-    if (user.favteam) {
-      vm.team = user.favteam;
-    }
+    Auth.getUser().then(function(user) {
+      var user = user
+      if (user.favteam) {
+        vm.team = user.favteam;
+      }
+    })
   }
 
   $scope.$on('login', function(e, user) {

@@ -15,7 +15,9 @@ function Nav($scope, $timeout, $state, Auth) {
   vm.isUser = Auth.isLoggedIn();
 
   if (vm.isUser) {
-    vm.user = Auth.getUser();
+    Auth.getUser().then(function(user) {
+      vm.user = user;
+    })
     vm.displayLoginButton = false;
     vm.displayLogout = true;
   }
@@ -57,7 +59,9 @@ function Nav($scope, $timeout, $state, Auth) {
           vm.displayLogin = false;
           vm.registering = false;
           vm.isUser = Auth.isLoggedIn();
-          vm.user = Auth.getUser();
+          Auth.getUser().then(function(user) {
+            vm.user = user;
+          })
           $timeout(function(){
             vm.displayLogout = true;
           }, 500);
@@ -72,7 +76,9 @@ function Nav($scope, $timeout, $state, Auth) {
         vm.loginForm = {};
         vm.displayLogin = false;
         vm.isUser = Auth.isLoggedIn();
-        vm.user = Auth.getUser();
+        Auth.getUser().then(function(user) {
+          vm.user = user;
+        })
         $timeout(function(){
           vm.displayLogout = true;
         }, 500);

@@ -27,7 +27,15 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
   }
 
   function getUser() {
-    return user;
+    if (user) {
+      return $q(function(res, rej) {
+        res(user);
+      })
+    }
+
+    return getUserStatus().then(function(data) {
+      return user = data;
+    })
   }
 
   function login(info) {
@@ -101,7 +109,7 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
     }
     return $http.post(stageUrl + 'status', {token: $window.sessionStorage.token}).then(function(data) {
       if (data) {
-        user = data.data;
+        return user = data.data;
       }
     })
   }
