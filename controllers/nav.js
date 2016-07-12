@@ -45,17 +45,12 @@ function Nav($scope, $timeout, $state, Auth) {
   vm.login = function(form) {
     vm.disabled = true;
 
-    console.log(form);
-
     if (form.confirmPassword) {
-      console.log(form);
       if (form.password != form.confirmPassword) {
-        console.log(form.password);
         vm.disabled = false;
         vm.loginForm = {};
       } else {
         delete form.confirmPassword;
-        console.log(form);
         Auth.register(form).then(function() {
           vm.disabled = false;
           vm.loginForm = {};
