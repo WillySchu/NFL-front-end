@@ -8,7 +8,6 @@ function Auth($window, $q, $timeout, $http) {
   const devUrl = 'http://10.5.82.83:5000/api/';
   const stageUrl = 'https://nfl-playbyplay-stage.herokuapp.com/api/';
   const proUrl = 'https://nfl-playbyplay-pro.herokuapp.com/api/';
-  console.log(user);
   return {
     isLoggedIn: isLoggedIn,
     login: login,
@@ -75,6 +74,7 @@ function Auth($window, $q, $timeout, $http) {
     $http.post(devUrl + 'register', info)
       .then(function(data) {
         if (data.status === 200 && data.data) {
+          console.log(data);
           user = data.data;
           $window.sessionStorage.token = user.token;
           delete user.token;
@@ -98,7 +98,7 @@ function Auth($window, $q, $timeout, $http) {
         res(false);
       })
     }
-    return $http.post(stageUrl + 'status', {token: $window.sessionStorage.token}).then(function(data) {
+    return $http.post(devUrl + 'status', {token: $window.sessionStorage.token}).then(function(data) {
       if (data) {
         console.log(data.data);
         user = data.data;
