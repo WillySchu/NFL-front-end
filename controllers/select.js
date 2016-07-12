@@ -1,9 +1,9 @@
 angular.module('app')
   .controller('Select', Select)
 
-Select.$inject = ['$scope', '$state', '$mdSidenav', 'Prediction', 'Graph'];
+Select.$inject = ['$q', '$scope', '$state', '$mdSidenav', 'Prediction', 'Graph'];
 
-function Select($scope, $state, $mdSidenav, Prediction, Graph) {
+function Select($q, $scope, $state, $mdSidenav, Prediction, Graph) {
   var vm = this;
 
   vm.features = {};
@@ -97,7 +97,7 @@ function Select($scope, $state, $mdSidenav, Prediction, Graph) {
 
         var pResults = psbl.map(drawSuccess)
 
-        Promise.all(pResults).then(function(data) {
+        $q.all(pResults).then(function(data) {
           var res = Graph.drawCSuccess(data, vm.data);
 
           vm.sData = res.sData;
@@ -105,7 +105,6 @@ function Select($scope, $state, $mdSidenav, Prediction, Graph) {
 
           vm.loading = false;
           $state.go('main.select.result.succ');
-          $scope.$apply();
         })
     } else {
 
@@ -116,7 +115,7 @@ function Select($scope, $state, $mdSidenav, Prediction, Graph) {
 
       var pResults = psbl.map(drawSuccess)
 
-      Promise.all(pResults).then(function(data) {
+      $q.all(pResults).then(function(data) {
         var res = Graph.drawSSuccess(data, vm.data);
 
         vm.sData = res.sData;
@@ -124,7 +123,6 @@ function Select($scope, $state, $mdSidenav, Prediction, Graph) {
 
         vm.loading = false;
         $state.go('main.select.result.succ');
-        $scope.$apply();
       })
     }
 
