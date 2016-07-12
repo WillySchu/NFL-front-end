@@ -76,7 +76,6 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
     $http.post(devUrl + 'register', info)
       .then(function(data) {
         if (data.status === 200 && data.data) {
-          console.log(data);
           user = data.data;
           $window.sessionStorage.token = user.token;
           delete user.token;
@@ -102,7 +101,6 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
     }
     return $http.post(devUrl + 'status', {token: $window.sessionStorage.token}).then(function(data) {
       if (data) {
-        console.log(data.data);
         user = data.data;
       }
     })
@@ -111,7 +109,6 @@ function Auth($rootScope, $window, $q, $timeout, $http) {
   function updateTeam(team) {
     if (isLoggedIn()) {
       return $http.post(devUrl + 'updateteam', {token: $window.sessionStorage.token, team}).then(function(data) {
-        console.log(data);
         return user.favteam = data.data;
       })
     } else {
