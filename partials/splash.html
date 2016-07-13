@@ -21,14 +21,14 @@
         </md-input-container>
         <md-input-container class="md-block">
           <label>Password</label>
-          <input required name="password" ng-model="splash.loginForm.password">
+          <input required name="password" ng-model="splash.loginForm.password" type='password'>
           <div ng-messages="loginForm.password.$error">
             <div ng-message="required">This is required.</div>
           </div>
         </md-input-container>
         <md-input-container ng-if='splash.showRegister' class="md-block">
           <label>Confirm Password</label>
-          <input required name="confirmPassword" ng-model="splash.loginForm.confirmPassword">
+          <input required name="confirmPassword" ng-model="splash.loginForm.confirmPassword" type='password'>
           <div ng-messages="loginForm.confirmPassword.$error">
             <div ng-message="required">This is required.</div>
           </div>
