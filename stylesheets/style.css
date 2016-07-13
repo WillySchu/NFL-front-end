@@ -102,11 +102,23 @@ md-content {
   font-size: 12px;
 }
 
-
 .navLogin.ng-hide-remove {
  animation: fadeInRight 0.5s;
 }
 
 .navLogin.ng-hide-add {
   animation: fadeOutRight 0.5s
+}
+
+.login-block {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.input-block {
+  padding: 10px;
+}
+
+.bg-white {
+  background-color: rgba(255, 255, 255, 0.8) !important;
 }
