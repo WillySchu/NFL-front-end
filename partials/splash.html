@@ -10,7 +10,7 @@
   </div>
 
   <div class='login' layout="column" flex-sm='80' flex-gt-sm='50'>
-    <md-content layout-padding>
+    <md-content layout-padding class='login-block'>
       <form name="loginForm" ng-submit="splash.submit(splash.loginForm)">
         <md-input-container class="md-block">
           <label>Email</label>
@@ -53,8 +53,8 @@
         </div>
 
       </form>
+      <md-button class='continue' ui-sref='main.select' type="button" name="continue">Continue without logging in</md-button>
     </md-content>
-    <md-button class='continue' ui-sref='main.select' type="button" name="continue">Continue without logging in</md-button>
   </div>
 
 </div>
