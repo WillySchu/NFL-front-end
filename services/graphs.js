@@ -72,7 +72,7 @@ function Graph() {
         chart: {
           type: 'sunburstChart',
           height: 450,
-          color: d3.scale.category10(),
+          color: d3.scale.category20(),
           duration: 250,
           mode: 'size'
         }
